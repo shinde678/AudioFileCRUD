@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main-content %}
+<div class="container-fluid mt-4">
+    <div class="card shadow mb-4">
+      <div class="card-header">        
+        <span class="font-weight-bold text-primary">Show AudioBook Detials</span>
+
+        <form method="get" action="{% url 'serachAudioBook' %}" class="d-none d-sm-inline-block form-inline mr-2 ml-md-2 my-2 my-md-0  navbar-search ml-2" >
+          {% csrf_token %}
+        <div class="input-group">
+          <input type="text" class="form-control border-0 small" placeholder="Search for..." name="search" required>
+            <div class="input-group-append">
+              <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-search fa-sm"></i></button>
+          </div>
+        </div>
+      </form>
+      <a href="{% url 'createAudioBook' %}" class="btn btn-sm btn-primary" style="float: right;">Add New AudioBook</a>
+      </div>
+       {% if messages %}
+              <span class="text-success font-weight-bold text-center mt-1">
+                {% for message in messages %}
+                  {{ message }}
+                {% endfor %}
+              </span>
+            {% endif %}
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered"  width="100%" cellspacing="0">
+            <thead>
+              <tr class="text-center">
+                  <th scope="col">Sr No</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Narrator</th>
+                  <th scope="col">Durations</th>
+                  <th scope="col">Upload Time</th>
+                  <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr class="text-center">
+                <th scope="col">Sr No</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Author</th>
+                  <th scope="col">Narrator</th>
+                  <th scope="col">Durations</th>
+                  <th scope="col">Upload Time</th>
+                  <th scope="col">Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+              
+              {% for i in object_list %} 
+              </tr>                     
+              <tr class="text-center font-weight-bold"">
+                <td>{{forloop.counter}}</td>
+                <td>{{i.title | title }}</td> 
+                <td>{{i.author}}</td>   
+                <td>{{i.narrator}}</td>   
+                <td>{{i.duration}}</td>  
+                <td>{{i.upload_time}}</td>                  
+                <td>
+                  <a href="{% url 'editAudioBook' i.id %}"><i class="fa fa-edit text-primary"></i></a>
+
+                  <a href="{% url 'deleteAudioBook' i.id %}"><i class="fa fa-trash text-danger confirm-delete"></i></a>
+                </td>
+              </tr> 
+              {% endfor %}                 
+             
+            </tbody>
+          </table>  
+          <nav aria-label="Page navigation example">
+            {% if is_paginated %}
+            <ul class="pagination">
+              {% if page_obj.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+              {% endif %}
+
+              <li class="page-item active"><span class="page-link">{{page_obj.number}}</span></li>
+              
+              {% if page_obj.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+              {% endif %}
+            </ul>
+            {% endif %}
+          </nav>                                
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock main-content %}
+

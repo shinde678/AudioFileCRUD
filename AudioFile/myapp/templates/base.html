@@ -1,0 +1,57 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!--FontAwesome CSS-->
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+
+    <!--Custom CSS-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+    <title>CRUD API | {% block title %} {% endblock title %} </title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     <div class="container">
+       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           <li class="nav-item">
+             <a class="nav-link active" aria-current="page" href="{% url 'manageSong' %}">Song</a>
+           </li>
+           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'managePodCast' %}">Podcast</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'manageAudioBook' %}">AudioBook</a>
+          </li>
+         </ul>
+        
+         <div>
+         
+         </div>
+       </div>
+     </div>
+    </nav>
+  
+    {% block main-content %} {% endblock main-content %}
+
+    <!-- Start Footer -->
+    <footer class="container-fluid bg-dark text-center p-2 mt-5 fixed-bottom">
+        <small class="text-white">|| Designed By Digambar Shinde || </small>
+    </footer> <!-- End Footer -->
+
+    <script src="{% static 'js/all.min.js' %}"></script>
+    
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+  </body>
+</html>

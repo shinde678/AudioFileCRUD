@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main-content %}
+<div class="container-fluid mt-4">
+    <div class="card shadow mb-4">
+      <div class="card-header text-center">  
+    <h4 class="page-header" style="color:red">Delete Confirmation </h4>
+    <span style="color:red;font-size:16px;display:block">Are you really want to Delete This ?</span>
+    <div class="row" style="margin-top:30px">
+            <div class="col-md-12">
+                <h3> {{ object }} </h3>
+        </div>
+    </div>
+    <div class="row" style="margin-top:30px">
+        <div class="col-md-12">
+            <form action="" method="post" id="delete">
+                {% csrf_token %}
+                <input type="submit" value="Delete"  class="btn btn-danger btn btn-raised" />
+                <a href="javascript:window.history.back()" class="btn btn-raised btn-primary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        //autofoucus
+        $('#id_name').focus();
+    });
+    
+    
+    $('#delete').submit(function(e){
+         $("#status").show(); // will first fade out the loading animation
+         $("#preloader").show(); // will fade out the white DIV that covers the website.
+         $('#message').html("<p>Loading Please wait.... Deletion may take some time.</p>")
+        
+    });
+    </script>
+{% endblock main-content %}
+
